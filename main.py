@@ -1,9 +1,10 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Request
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 import uvicorn
-
+app = FastAPI()
 templates = Jinja2Templates(directory="templates")
-app = FastAPI( )
+
 
 inventory = {
         1: {"name": "Foo",
@@ -13,8 +14,8 @@ inventory = {
     }
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+async def root(request: Request):
+    return templates.TemplateResponse("homepage.html", {"request": request})
 
 
 @app.get("/hello/{name}")
