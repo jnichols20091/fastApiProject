@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  python:
+    build:
+        context: ./
+        dockerfile: ./Dockerfile
+    entrypoint: python3 main.py
+    volumes:
+      - .:/fastApiProject
+    ports:
+        - 8000:8000
